@@ -2,6 +2,8 @@
 
 ## Liste des fontionnalités de l'application
 
+- Application Android
+
 ### Pour le 19 décembre
 - Authentification
 - Page détaillé du produit
