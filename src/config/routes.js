@@ -4,39 +4,27 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
-import SplashScreen from '../screens/SplashScreen';
 
 const Stack = createStackNavigator();
 
-const config = {
-  screens: {
-    login: {
-      path: '/',
-    },
-    register: {
-      path: '/register',
-    },
-    home: {
-      path: '/home',
-    },
-  },
-};
-
-const linking = {
-  prefixes: ['https://localhost:8081'],
-  config,
-};
-
 const Routes = props => {
   return (
-    <NavigationContainer linking={linking} fallback={<SplashScreen />}>
-      <Stack.Navigator initialRouteName="Register">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Register"
+          component={RegisterScreen}
+          options={{headerShown: false}}
+        />
         {/*
-         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-        <Stack.Screen name="Cart" component={CartScreen} /> 
+         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="Details" component={DetailsScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="Cart" component={CartScreen} options={{ headerShown: false }}/> 
         */}
       </Stack.Navigator>
     </NavigationContainer>
