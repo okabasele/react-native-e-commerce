@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-const Button = ({title, onPress}) => {
+const Button = ({label, onPress}) => {
   return (
     <StyledButton onPress={onPress}>
-      <StyledText>{title}</StyledText>
+      <StyledText>{label}</StyledText>
     </StyledButton>
   );
 };

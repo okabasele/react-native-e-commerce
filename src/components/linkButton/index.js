@@ -4,11 +4,11 @@ import {Link} from '@react-navigation/native';
 
 const LinkButton = ({to, label, onPress}) => {
   return (
-    <Link to={to}>
-      <StyledButton onPress={onPress}>
+    <StyledButton onPress={onPress}>
+      <StyledLink to={to}>
         <StyledText>{label}</StyledText>
-      </StyledButton>
-    </Link>
+      </StyledLink>
+    </StyledButton>
   );
 };
 
@@ -26,6 +26,10 @@ const StyledButton = styled.TouchableOpacity`
 const StyledText = styled.Text`
   line-height: 29px;
   text-align: center;
+`;
+
+const StyledLink = styled(Link)`
+  align-self: center;
 `;
 
 export default LinkButton;

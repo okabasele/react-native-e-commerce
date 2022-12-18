@@ -126,7 +126,7 @@ const RegisterForm = () => {
           value={inputs.passwordConfirm}
           isPassword={true}
         />
-        <Button title={'Continuer'} onPress={handleSubmit} />
+        <Button label={'Continuer'} onPress={handleSubmit} />
         <StyledFormFooter>
           <Text>
             En créant un compte, vous acceptez les conditions générales de vente

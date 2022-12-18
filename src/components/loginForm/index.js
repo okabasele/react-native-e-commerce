@@ -3,9 +3,9 @@ import InputText from '../inputText';
 import Button from '../button';
 import LinkButton from '../linkButton';
 import Title from '../title';
-import StyledLink from '../styledLink';
 import {Text, View} from 'react-native';
 import styled from 'styled-components/native';
+import {useNavigation} from '@react-navigation/native';
 
 const RegisterForm = () => {
   const [inputs, setInputs] = useState({
@@ -18,10 +18,13 @@ const RegisterForm = () => {
     password: '',
     passwordConfirm: '',
   });
+  const navigation = useNavigation();
 
   const checkInputs = () => {};
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    navigation.navigate('Home');
+  };
 
   return (
     <>
@@ -42,7 +45,7 @@ const RegisterForm = () => {
             value={inputs.password}
             isPassword={true}
           />
-          <Button title={'Continuer'} onPress={handleSubmit} />
+          <Button label={'Continuer'} onPress={handleSubmit} />
           <StyledFormFooter>
             <Text>
               En passant votre commande, vous acceptez les conditions générales

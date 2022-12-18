@@ -4,6 +4,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
+import HomeScreen from '../screens/HomeScreen';
+import CartScreen from '../screens/CartScreen';
 
 const Stack = createStackNavigator();
 
@@ -21,11 +23,18 @@ const Routes = props => {
           component={RegisterScreen}
           options={{headerShown: false}}
         />
-        {/*
-         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="Details" component={DetailsScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="Cart" component={CartScreen} options={{ headerShown: false }}/> 
-        */}
+
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Cart"
+          component={CartScreen}
+          options={{headerShown: false}}
+        />
+        {/* <Stack.Screen name="Details" component={DetailsScreen} options={{ headerShown: false }}/> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
