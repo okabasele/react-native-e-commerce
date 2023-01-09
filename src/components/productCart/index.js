@@ -1,8 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components/native';
 import {Text} from 'react-native';
 
-const ProductCart = ({product, handleAddProduct, handleSubProduct}) => {
+const ProductCart = ({
+  product,
+  handleAddProduct,
+  handleSubProduct,
+  handleDeleteProduct,
+}) => {
+  useEffect(() => {}, [product.quantity]);
+
   return (
     <>
       <Container>
@@ -13,18 +20,21 @@ const ProductCart = ({product, handleAddProduct, handleSubProduct}) => {
             }}
           />
           <Counter>
-            <StyledButton onPress={handleAddProduct}>
+            <StyledButton onPress={() => handleAddProduct(product.id)}>
               <Text>+</Text>
             </StyledButton>
             <Count>{product.quantity}</Count>
-            <StyledButton onPress={handleSubProduct}>
+            <StyledButton onPress={() => handleSubProduct(product.id)}>
               <Text>-</Text>
             </StyledButton>
           </Counter>
         </Left>
         <About>
-          <Title>{product.title}</Title>
-          <Price>{product.price}</Price>
+          <Text>{product.title}</Text>
+          <Text>{product.price}€</Text>
+          <DeleteButton onPress={() => handleDeleteProduct(product.id)}>
+            <Text>Supprimer</Text>
+          </DeleteButton>
         </About>
       </Container>
     </>
@@ -32,14 +42,18 @@ const ProductCart = ({product, handleAddProduct, handleSubProduct}) => {
 };
 
 const StyledImage = styled.Image`
-  height: 60px;
-  width: 60px;
+  height: 150px;
+  width: 150px;
 `;
 const Container = styled.View`
-  width: 100px;
+  margin-top: 20px;
+  width: 90%;
   height: 200px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  margin: 0 5%;
 `;
 const About = styled.View`
   width: 50%;
@@ -50,10 +64,11 @@ const Counter = styled.View`
   height: 10%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
 `;
 const Left = styled.View`
-  width: 50%;
+  width: 150px;
   height: 100%;
 `;
 const StyledButton = styled.TouchableOpacity`
@@ -70,26 +85,23 @@ const StyledButton = styled.TouchableOpacity`
   color: #202020;
   cursor: pointer;
 `;
-const Count = styled.Text`
+const DeleteButton = styled.TouchableOpacity`
+  border-radius: 50px;
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 20px;
+  font-family: 'Open Sans';
+  font-weight: 900;
+  color: #202020;
+  cursor: pointer;
+`;
+const Count = styled.Text`
+  font-size: 16px;
   font-family: 'Open Sans';
   font-weight: 600;
   color: #202020;
-  margin: 0 1px;
-`;
-const Title = styled.Text`
-  padding-top: 20px;
-  font-size: 26px;
-  font-family: 'Open Sans';
-  font-weight: 800;
-  color: #202020;
-`;
-const Price = styled.Text`
-  padding-top: 10px;
-  line-height: 10px;
-  font-size: 32px;
-  font-family: 'Open Sans';
-  font-weight: 800;
-  color: #202020;
+  margin: 0 6px;
 `;
 export default ProductCart;

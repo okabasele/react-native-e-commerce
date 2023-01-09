@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from '../components/header';
 import NavBar from '../components/navbar';
 import CategoryCard from '../components/categoryCard';
@@ -16,6 +17,7 @@ const HomeScreen = () => {
     const getProducts = async () => {
       try {
         const response = await axios.get(url);
+        await AsyncStorage.setItem('products', JSON.stringify(response.data));
         setProducts(response.data);
       } catch (error) {
         console.log({error});

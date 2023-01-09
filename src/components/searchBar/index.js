@@ -1,13 +1,39 @@
-import React from 'react';
-import {Link} from '@react-navigation/native';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
+import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SearchBar = ({to, label}) => {
+const SearchBar = () => {
+  const [input, setInput] = useState('');
+  const navigation = useNavigation();
+
+  const handleSubmit = async () => {
+    console.log('search bar submitting');
+    console.log({input});
+    try {
+      const productsJSON = await AsyncStorage.getItem('products');
+      const data = JSON.parse(productsJSON);
+      const products = data.filter(({title}) =>
+        title.toLowerCase().startsWith(input.toLowerCase()),
+      );
+      // console.log({productsJSON, data, products});
+
+      navigation.navigate('Search', {products: products});
+    } catch (error) {
+      console.log({error});
+    }
+    setInput('');
+  };
+
   return (
     <>
       <SearchContainer>
-        <StyledTextInput placeholder={'Rechercher sur Amazon.fr'} />
-        <StyledButton>
+        <StyledTextInput
+          placeholder={'Rechercher sur Amazon.fr'}
+          onChangeText={text => setInput({text})}
+          defaultValue={input}
+        />
+        <StyledButton onPress={handleSubmit}>
           <StyledImage
             source={{
               uri: 'https://cdn1.iconfinder.com/data/icons/web-essentials-6/24/search-512.png',

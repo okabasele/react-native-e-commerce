@@ -7,6 +7,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 import HomeScreen from '../screens/HomeScreen';
 import CartScreen from '../screens/CartScreen';
 import DetailsScreen from '../screens/DetailsScreen';
+import SearchScreen from '../screens/SearchScreen';
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,11 @@ const Routes = props => {
         <Stack.Screen
           name="Details"
           component={DetailsScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Search"
+          component={SearchScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
