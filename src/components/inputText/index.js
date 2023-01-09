@@ -16,7 +16,7 @@ const InputText = ({
         <StyledTextInput
           placeholder={placeholder}
           onChangeText={onChangeText}
-          value={value}
+          defaultValue={value}
           secureTextEntry={true}
         />
       </StyledView>
@@ -25,7 +25,7 @@ const InputText = ({
   return (
     <StyledView>
       <StyledLabel>{label}</StyledLabel>
-      <StyledTextInput placeholder={placeholder} value={value} />
+      <StyledTextInput placeholder={placeholder} defaultValue={value} />
     </StyledView>
   );
 };

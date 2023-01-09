@@ -1,11 +1,40 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from '../components/header';
 import NavBar from '../components/navbar';
 import CategoryCard from '../components/categoryCard';
 import HighlightProduct from '../components/highlightProduct';
 import styled from 'styled-components/native';
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, FlatList} from 'react-native';
+import axios from 'axios';
+import {Link} from '@react-navigation/native';
+import ProductCard from '../components/productCard';
+
 const HomeScreen = () => {
+  const [products, setProducts] = useState([]);
+  const url = 'https://fakestoreapi.com/products';
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const response = await axios.get(url);
+        await AsyncStorage.setItem('products', JSON.stringify(response.data));
+        setProducts(response.data);
+      } catch (error) {
+        console.log({error});
+      }
+    };
+    getProducts();
+  }, []);
+  const renderItem = ({item}) => {
+    return (
+      <Link to={{screen: 'Details', params: {id: item.id}}}>
+        <ProductContainer>
+          <ProductCard product={item} />
+        </ProductContainer>
+      </Link>
+    );
+  };
+
   return (
     <>
       <StyledContainer>
@@ -43,6 +72,16 @@ const HomeScreen = () => {
               'https://m.media-amazon.com/images/I/51dK9TLtoaL._AC_SY460_.png'
             }
           />
+          <CenterView>
+            <FlatList
+              data={products}
+              renderItem={renderItem}
+              horizontal={false}
+              numColumns={3}
+              keyExtractor={product => product.id}
+              onEndReachedThreshold={0.4}
+            />
+          </CenterView>
         </ScrollView>
         <NavBar />
       </StyledContainer>
@@ -55,6 +94,17 @@ const StyledImage = styled.Image`
 const StyledContainer = styled.View`
   width: 100%;
   height: 100%;
+`;
+
+const CenterView = styled.View`
+  justify-content: center;
+  align-items: center;
+`;
+
+const ProductContainer = styled.View`
+  flex: 1;
+  flex-direction: column;
+  /* margin-left: 10px; */
 `;
 const CategoryContainer = styled.View`
   margin-top: 10px;

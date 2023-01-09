@@ -6,15 +6,15 @@
 
 ### Pour le 19 décembre
 - Authentification
-- Page détaillé du produit
-- Liste des produits
+- Page d'accueil
 - Panier
 
 ### Pour le 9 janvier
-- CRUD Produit
+- Liste des produits
+- Page détaillé du produit
+- Recherche de produit
+- Paiement
 - Suivi de commande pour les clients
-- Gestion des commandes pour les magasins
-- Gestion des stocks pour les magasins avec le retour client
 
 ### Fonctionnalités futures
 - Back office
