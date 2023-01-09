@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import InputText from '../inputText';
 import Button from '../button';
 import LinkButton from '../linkButton';
@@ -6,24 +7,34 @@ import Title from '../title';
 import {Text, View} from 'react-native';
 import styled from 'styled-components/native';
 import {useNavigation} from '@react-navigation/native';
+import AlertApiError from '../alertApiError';
 
 const RegisterForm = () => {
   const [inputs, setInputs] = useState({
     email: '',
     password: '',
-    passwordConfirm: '',
   });
   const [errorInputs, setErrorInputs] = useState({
     email: '',
     password: '',
-    passwordConfirm: '',
   });
   const navigation = useNavigation();
 
   const checkInputs = () => {};
 
-  const handleSubmit = () => {
-    navigation.navigate('Home');
+  const handleSubmit = async () => {
+    const payload = {
+      email: inputs.email,
+      password: inputs.password,
+    };
+    try {
+      await AsyncStorage.setItem('userToken', inputs.email);
+      navigation.navigate('Home');
+    } catch (error) {
+      console.log({error});
+      AlertApiError('Erreur', 'Une erreur est survenue lors de la connexion.');
+    }
+    setInputs({email: '', password: ''});
   };
 
   return (

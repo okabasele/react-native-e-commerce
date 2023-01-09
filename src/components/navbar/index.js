@@ -13,13 +13,13 @@ const NavBar = () => {
             }}
           />
         </StyledLink>
-        <View>
+        <StyledLink to={{screen: 'Login'}}>
           <StyledImage
             source={{
               uri: 'https://cdn1.iconfinder.com/data/icons/web-essentials-6/24/user-512.png',
             }}
           />
-        </View>
+        </StyledLink>
 
         <StyledLink to={{screen: 'Cart'}}>
           <StyledImage
@@ -29,13 +29,13 @@ const NavBar = () => {
           />
         </StyledLink>
 
-        <View>
+        <StyledLink to={{screen: 'Login'}}>
           <StyledImage
             source={{
               uri: 'https://cdn4.iconfinder.com/data/icons/web-essentials-6/24/hamburger_menu-512.png',
             }}
           />
-        </View>
+        </StyledLink>
       </StyledView>
     </>
   );
@@ -48,15 +48,14 @@ const StyledView = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: flex-end;
+  align-items: center;
   border: 1px solid #a6a6a6a6;
   background-color: #fff;
 `;
 
 const StyledLink = styled(Link)`
-  width: 30px;
-  height: 30px;
-  align-self: center;
+  width: 40px;
+  height: 40px;
 `;
 
 export default NavBar;
