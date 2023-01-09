@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InputText from '../inputText';
 import Button from '../button';
@@ -9,7 +9,7 @@ import styled from 'styled-components/native';
 import {useNavigation} from '@react-navigation/native';
 import AlertApiError from '../alertApiError';
 
-const RegisterForm = () => {
+const LoginForm = () => {
   const [inputs, setInputs] = useState({
     email: '',
     password: '',
@@ -36,6 +36,16 @@ const RegisterForm = () => {
     }
     setInputs({email: '', password: ''});
   };
+
+  useEffect(() => {
+    const asyncGetToken = async () => {
+      const token = await AsyncStorage.getItem('userToken');
+      if (token) {
+        navigation.navigate('Home');
+      }
+    };
+    asyncGetToken();
+  }, [navigation]);
 
   return (
     <>
@@ -97,4 +107,4 @@ const CenterView = styled.View`
   padding: 10px;
 `;
 
-export default RegisterForm;
+export default LoginForm;
