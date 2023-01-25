@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import AlertApiError from '../components/alertApiError';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {notify} from '../utils/notify';
 
 const PaymentScreen = ({navigation, route}) => {
   const {confirmPayment, loading} = useConfirmPayment();
@@ -40,9 +41,14 @@ const PaymentScreen = ({navigation, route}) => {
       paymentMethodData: {billingDetails},
     });
 
+    console.log({paymentIntent});
     if (error || !paymentIntent) {
       return AlertApiError('Erreur', "Le paiement n'a pas abouti.");
     }
+    notify(
+      'Commande',
+      `Le paiement de ${route.params.amount}€ a été effectué !`,
+    );
     await AsyncStorage.removeItem('cart');
     navigation.navigate('Home');
   };
@@ -56,6 +62,7 @@ const PaymentScreen = ({navigation, route}) => {
         }}
       />
       <Button onPress={handlePayPress} title="Pay" disabled={loading} />
+      <Button onPress={() => notify('wsh', 'message')} title="Notif" />
     </View>
   );
 };
