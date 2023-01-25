@@ -4,6 +4,8 @@ import {CardField, useConfirmPayment} from '@stripe/stripe-react-native';
 import {API_URL} from '@env';
 import styled from 'styled-components';
 import axios from 'axios';
+import AlertApiError from '../components/alertApiError';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PaymentScreen = ({navigation, route}) => {
   const {confirmPayment, loading} = useConfirmPayment();
@@ -38,11 +40,11 @@ const PaymentScreen = ({navigation, route}) => {
       paymentMethodData: {billingDetails},
     });
 
-    if (error) {
-      console.log('Payment confirmation error', error);
-    } else if (paymentIntent) {
-      console.log('Success from promise', paymentIntent);
+    if (error || !paymentIntent) {
+      return AlertApiError('Erreur', "Le paiement n'a pas abouti.");
     }
+    await AsyncStorage.removeItem('cart');
+    navigation.navigate('Home');
   };
 
   return (
