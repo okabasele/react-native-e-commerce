@@ -13,13 +13,6 @@ const NavBar = () => {
             }}
           />
         </StyledLink>
-        <StyledLink to={{screen: 'Login'}}>
-          <StyledImage
-            source={{
-              uri: 'https://cdn1.iconfinder.com/data/icons/web-essentials-6/24/user-512.png',
-            }}
-          />
-        </StyledLink>
 
         <StyledLink to={{screen: 'Cart'}}>
           <StyledImage
@@ -28,11 +21,10 @@ const NavBar = () => {
             }}
           />
         </StyledLink>
-
-        <StyledLink to={{screen: 'Login'}}>
+        <StyledLink to={{screen: 'Login', params: {logout: true}}}>
           <StyledImage
             source={{
-              uri: 'https://cdn4.iconfinder.com/data/icons/web-essentials-6/24/hamburger_menu-512.png',
+              uri: 'https://cdn4.iconfinder.com/data/icons/web-essentials-6/24/settings_gear-256.png',
             }}
           />
         </StyledLink>

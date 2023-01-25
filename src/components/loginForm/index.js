@@ -6,7 +6,7 @@ import LinkButton from '../linkButton';
 import Title from '../title';
 import {Text, View} from 'react-native';
 import styled from 'styled-components/native';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import AlertApiError from '../alertApiError';
 
 const LoginForm = () => {
@@ -19,14 +19,10 @@ const LoginForm = () => {
     password: '',
   });
   const navigation = useNavigation();
-
+  const router = useRoute();
   const checkInputs = () => {};
 
   const handleSubmit = async () => {
-    const payload = {
-      email: inputs.email,
-      password: inputs.password,
-    };
     try {
       await AsyncStorage.setItem('userToken', inputs.email);
       navigation.navigate('Home');
@@ -44,7 +40,15 @@ const LoginForm = () => {
         navigation.navigate('Home');
       }
     };
-    asyncGetToken();
+    const asyncRemoveToken = async () => {
+      await AsyncStorage.removeItem('userToken');
+    };
+
+    if (!router.params?.logout) {
+      asyncGetToken();
+    } else {
+      asyncRemoveToken();
+    }
   }, [navigation]);
 
   return (

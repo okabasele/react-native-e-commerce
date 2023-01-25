@@ -4,6 +4,11 @@
 
 - Application Android
 
+### Lancement de l'application
+- npm run api
+- npm run start
+- npm run android
+
 ### Pour le 19 décembre
 - Authentification
 - Page d'accueil

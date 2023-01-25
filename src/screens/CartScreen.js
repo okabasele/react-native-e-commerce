@@ -8,11 +8,18 @@ import Button from '../components/button';
 import ProductCart from '../components/productCart';
 import AlertApiError from '../components/alertApiError';
 import getFormattedCost from '../utils/getFormattedCost';
+import {useNavigation} from '@react-navigation/native';
 
 const CartScreen = () => {
   const [products, setProducts] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
-  const [numArticles, setNumArticles] = useState('article');
+  const navigation = useNavigation();
+
+  const numberOfArticles =
+    products.length > 1
+      ? `${products.length} articles`
+      : `${products.length} article`;
+
   useEffect(() => {
     const getCartItems = async () => {
       try {
@@ -27,9 +34,6 @@ const CartScreen = () => {
               0,
             ),
           );
-          if (data.length > 1) {
-            setNumArticles('articles');
-          }
         }
       } catch (error) {
         console.log({error});
@@ -38,6 +42,14 @@ const CartScreen = () => {
     };
     getCartItems();
   }, []);
+
+  const handlePayment = async () => {
+    const token = await AsyncStorage.getItem('userToken');
+    if (token) {
+      navigation.navigate('Payment', {amount: totalCost, email: token});
+    }
+  };
+
   const handleAddProduct = async id => {
     const updatedProducts = products.map(product => {
       if (product.id === id) {
@@ -119,6 +131,7 @@ const CartScreen = () => {
       </>
     );
   }
+
   return (
     <>
       <StyledContainer>
@@ -130,7 +143,8 @@ const CartScreen = () => {
           </SubTotal>
 
           <Button
-            label={`Passer la commande (${products.length} ${numArticles})`}
+            label={`Passer la commande (${numberOfArticles})`}
+            onPress={handlePayment}
           />
 
           {products.map(product => (

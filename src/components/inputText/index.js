@@ -25,7 +25,11 @@ const InputText = ({
   return (
     <StyledView>
       <StyledLabel>{label}</StyledLabel>
-      <StyledTextInput placeholder={placeholder} defaultValue={value} />
+      <StyledTextInput
+        placeholder={placeholder}
+        defaultValue={value}
+        onChangeText={onChangeText}
+      />
     </StyledView>
   );
 };

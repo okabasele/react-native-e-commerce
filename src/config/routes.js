@@ -8,6 +8,7 @@ import HomeScreen from '../screens/HomeScreen';
 import CartScreen from '../screens/CartScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 import SearchScreen from '../screens/SearchScreen';
+import PaymentScreen from '../screens/PaymentScreen';
 
 const Stack = createStackNavigator();
 
@@ -44,6 +45,11 @@ const Routes = props => {
         <Stack.Screen
           name="Search"
           component={SearchScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Payment"
+          component={PaymentScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
