@@ -9,6 +9,7 @@ import {View, ScrollView, FlatList} from 'react-native';
 import axios from 'axios';
 import {Link} from '@react-navigation/native';
 import ProductCard from '../components/productCard';
+import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
 
 const HomeScreen = () => {
   const [products, setProducts] = useState([]);
@@ -67,10 +68,12 @@ const HomeScreen = () => {
               />
             </CategoryContainer>
           </View>
-          <HighlightProduct
-            imgPath={
-              'https://m.media-amazon.com/images/I/51dK9TLtoaL._AC_SY460_.png'
-            }
+          <BannerAd
+            unitId={TestIds.BANNER}
+            size={BannerAdSize.FULL_BANNER}
+            requestOptions={{
+              requestNonPersonalizedAdsOnly: true,
+            }}
           />
           <CenterView>
             <FlatList

@@ -1,4 +1,7 @@
 {
   "name": "reactNativeAmazon",
-  "displayName": "reactNativeAmazon"
+  "displayName": "reactNativeAmazon",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-2395730945518963~1034932807"
+  }
 }
